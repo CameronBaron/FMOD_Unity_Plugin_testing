@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{fca14ce3-75b3-4de6-8d6d-9c6a57a6b501}">
+        <property name="assetPath">
+            <value>Ambience/crow_cawing_single_03</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.55891156462585034</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{abfc3c33-6703-4d2f-a4c7-f45b059864dd}</destination>
+        </relationship>
+    </object>
+</objects>
