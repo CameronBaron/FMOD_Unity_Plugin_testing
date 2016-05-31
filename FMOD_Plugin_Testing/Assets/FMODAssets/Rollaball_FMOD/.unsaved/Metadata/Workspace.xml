@@ -17,10 +17,10 @@
             <destination>{74c3f345-8cc1-4704-850c-a04007fe7f4e}</destination>
         </relationship>
         <relationship name="platforms">
-            <destination>{ecea60b5-6930-4f88-b681-3ff890af5e15}</destination>
+            <destination>{0455c1c5-5831-42b6-a6a5-3975a0228c37}</destination>
         </relationship>
     </object>
-    <object class="Platform" id="{ecea60b5-6930-4f88-b681-3ff890af5e15}">
+    <object class="Platform" id="{0455c1c5-5831-42b6-a6a5-3975a0228c37}">
         <property name="hardwareType">
             <value>0</value>
         </property>
