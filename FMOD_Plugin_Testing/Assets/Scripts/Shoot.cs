@@ -20,7 +20,12 @@ public class Shoot : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0) && Time.timeScale > 0)
 		{
-			FMODUnity.RuntimeManager.PlayOneShot(shoot, transform.position);
+			//FMODUnity.RuntimeManager.PlayOneShot(shoot, transform.position);
+			FMOD.Studio.EventInstance fire = FMODUnity.RuntimeManager.CreateInstance(shoot);
+			//fire.getVolume(
+			fire.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+			fire.start();
+			fire.release();
 			
 			GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
 			bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
