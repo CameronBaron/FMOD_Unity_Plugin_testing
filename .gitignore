@@ -36,3 +36,5 @@ Assets/FMODStudioCache.asset
 Assets/StreamingAssets/*.bank
 fmod.log
 fmod_editor.log
+FMOD_Plugin_Testing/Library/
+FMOD_Plugin_Testing/obj/
