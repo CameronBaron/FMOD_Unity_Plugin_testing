@@ -80,11 +80,11 @@
             <destination>{33d666ff-0853-4439-95c9-7d72867f26d9}</destination>
         </relationship>
         <relationship name="markers">
-            <destination>{99b5101a-b2b0-4de8-9a98-7ac859325cb0}</destination>
             <destination>{74b7d9e3-f7d9-40ac-966f-87e100e2d8c0}</destination>
-            <destination>{92e3d242-de62-4783-9fa6-26ac59f33626}</destination>
-            <destination>{aadeb293-71e8-4b81-81a7-9a8527a791a6}</destination>
+            <destination>{99b5101a-b2b0-4de8-9a98-7ac859325cb0}</destination>
             <destination>{56b7d6af-ecbc-4be1-a24a-04cbfbf91b01}</destination>
+            <destination>{aadeb293-71e8-4b81-81a7-9a8527a791a6}</destination>
+            <destination>{92e3d242-de62-4783-9fa6-26ac59f33626}</destination>
         </relationship>
     </object>
     <object class="GameParameter" id="{f381d58b-c420-414b-8f09-747a54e64fda}">
@@ -148,20 +148,6 @@
             <destination>{380e829d-d614-4600-ab33-b40f162f458e}</destination>
         </relationship>
     </object>
-    <object class="TempoMarker" id="{99b5101a-b2b0-4de8-9a98-7ac859325cb0}">
-        <property name="position">
-            <value>0</value>
-        </property>
-        <property name="tempo">
-            <value>130</value>
-        </property>
-        <relationship name="timeline">
-            <destination>{2df4bb12-3307-4f26-8693-4b8fff26a95a}</destination>
-        </relationship>
-        <relationship name="markerTrack">
-            <destination>{2271f452-b217-41ee-b2f5-b1a9491e3a07}</destination>
-        </relationship>
-    </object>
     <object class="LoopRegion" id="{74b7d9e3-f7d9-40ac-966f-87e100e2d8c0}">
         <property name="position">
             <value>0</value>
@@ -176,12 +162,26 @@
             <destination>{a5f0504f-2471-4477-bdfa-900f551adc0a}</destination>
         </relationship>
     </object>
-    <object class="NamedMarker" id="{92e3d242-de62-4783-9fa6-26ac59f33626}">
+    <object class="TempoMarker" id="{99b5101a-b2b0-4de8-9a98-7ac859325cb0}">
         <property name="position">
-            <value>7.4000000000000004</value>
+            <value>0</value>
+        </property>
+        <property name="tempo">
+            <value>130</value>
+        </property>
+        <relationship name="timeline">
+            <destination>{2df4bb12-3307-4f26-8693-4b8fff26a95a}</destination>
+        </relationship>
+        <relationship name="markerTrack">
+            <destination>{2271f452-b217-41ee-b2f5-b1a9491e3a07}</destination>
+        </relationship>
+    </object>
+    <object class="NamedMarker" id="{56b7d6af-ecbc-4be1-a24a-04cbfbf91b01}">
+        <property name="position">
+            <value>16.5</value>
         </property>
         <property name="name">
-            <value>outro</value>
+            <value>end</value>
         </property>
         <relationship name="timeline">
             <destination>{2df4bb12-3307-4f26-8693-4b8fff26a95a}</destination>
@@ -200,8 +200,8 @@
         <property name="quantizationInterval">
             <value>2</value>
         </property>
-        <relationship name="triggerConditions">
-            <destination>{b9884976-c05f-4c5f-adc5-b0ae1e479a06}</destination>
+        <relationship name="destination">
+            <destination>{92e3d242-de62-4783-9fa6-26ac59f33626}</destination>
         </relationship>
         <relationship name="timeline">
             <destination>{2df4bb12-3307-4f26-8693-4b8fff26a95a}</destination>
@@ -209,16 +209,16 @@
         <relationship name="markerTrack">
             <destination>{f22c77ce-a8e8-43e6-aa34-944e045ae480}</destination>
         </relationship>
-        <relationship name="destination">
-            <destination>{92e3d242-de62-4783-9fa6-26ac59f33626}</destination>
+        <relationship name="triggerConditions">
+            <destination>{b9884976-c05f-4c5f-adc5-b0ae1e479a06}</destination>
         </relationship>
     </object>
-    <object class="NamedMarker" id="{56b7d6af-ecbc-4be1-a24a-04cbfbf91b01}">
+    <object class="NamedMarker" id="{92e3d242-de62-4783-9fa6-26ac59f33626}">
         <property name="position">
-            <value>16.5</value>
+            <value>7.4000000000000004</value>
         </property>
         <property name="name">
-            <value>end</value>
+            <value>outro</value>
         </property>
         <relationship name="timeline">
             <destination>{2df4bb12-3307-4f26-8693-4b8fff26a95a}</destination>
