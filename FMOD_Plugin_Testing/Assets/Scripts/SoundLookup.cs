@@ -5,25 +5,36 @@ public class SoundLookup : MonoBehaviour
 {
 	public static readonly SoundLookup _instance = new SoundLookup();
 
-					// <Name of Physics Material, 
-	public static Dictionary<string, FMOD.Studio.EventInstance> soundTable;
+	public List<FMOD.Studio.EventInstance> events;
+	public List<FMOD.Studio.EventDescription> eventDescriptions;
+	public List<FMOD.ChannelGroup> channelGroups;
+	public List<FMOD.DSP> dsps;
+
+	FMOD.DSP_METERING_INFO dspOutput;
+
+	public FMOD.Studio.System system;
+	
+	//public static Dictionary<string, FMOD.Studio.EventInstance> soundTable;
 	
 	SoundLookup() {}
 
 
 	void Start ()
 	{
-		soundTable = new Dictionary<string, FMOD.Studio.EventInstance>();
-	}
+		// Make FMOD Vars
+		events = new List<FMOD.Studio.EventInstance>();
+		eventDescriptions = new List<FMOD.Studio.EventDescription>();
+		channelGroups = new List<FMOD.ChannelGroup>();
+		dsps = new List<FMOD.DSP>();
 
-	FMOD.Studio.EventInstance GetSoundEvent(string key)
-	{
-		// If sound is not in dictionary return error
-		if (!soundTable.ContainsKey(key))
-		{
-			Debug.LogError("Error: " + key + " not found");
-		}
+		// Get reference to main FMOD system.
+		system = FMODUnity.RuntimeManager.StudioSystem;
 
-		return soundTable[key];
+		FMOD.ChannelGroup group;
+		FMOD.Studio.EventInstance event1;
+		FMOD.Studio.EventDescription event1Desc;
+
+
 	}
+	
 }

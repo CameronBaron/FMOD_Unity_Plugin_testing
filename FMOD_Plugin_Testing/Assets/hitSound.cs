@@ -1,52 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class hitSound : MonoBehaviour {
-
+public class hitSound : MonoBehaviour
+{
 	[FMODUnity.EventRef]
 	public string impactSound = "Event:/ImpactSound";
 	FMOD.Studio.EventInstance impactEv;
 	FMOD.Studio.ParameterInstance Intensity;
 
-	public Rigidbody rb;
+	Rigidbody rb;
 
-	public float HitVel;
+	float HitVel;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 
 		rb = GetComponent<Rigidbody>();
 
 		impactEv = FMODUnity.RuntimeManager.CreateInstance(impactSound);
-
-		impactEv.getParameter("Intensity", out Intensity);
+		FMOD.RESULT result = impactEv.getParameter("Size", out Intensity);
 	
 	}
 	
 	// Update is called once per frame
-	void OnCollisionEnter(Collision collision) {	
+	void OnCollisionEnter(Collision collision)
+	{
+		if (Intensity.isValid())
+		{
+			HitVel = (collision.relativeVelocity.magnitude);
+			HitVel = HitVel / 20;
 
-		HitVel = (collision.relativeVelocity.magnitude);
-		
-		HitVel = HitVel/20;
-		Debug.Log (HitVel);
-		
-		Intensity.setValue (HitVel);
-		
-		impactEv.start ();
+			FMOD.RESULT result = Intensity.setValue(HitVel);
 
-			if (collision.gameObject.CompareTag ("Ground")) {
-
-				Debug.Log ("ground");
-
+			if (collision.gameObject.CompareTag("Ground"))
+			{
+				Debug.Log("ground");
 			}
-
-
-			else {
-
-				Debug.Log ("cube");
-
+			else
+			{
+				Debug.Log("cube");
 			}
+		}
 
+		impactEv.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+		impactEv.start();
+		impactEv.release();
+		Destroy(gameObject);
 	}
 }

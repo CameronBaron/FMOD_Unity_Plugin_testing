@@ -11,27 +11,23 @@ public class PauseMenuVolumes : MonoBehaviour
 
 	string musicBusPath = "bus:/Music";
 	FMOD.Studio.Bus musicBus;
-	FMOD.ChannelGroup musicChannelGroup;
 	float musicVolume;
 
 	string sfxBusPath = "bus:/SFX";
 	FMOD.Studio.Bus sfxBus;
-	FMOD.ChannelGroup sfxChannelGroup;
 	float sfxVolume;
 
 	string masterBusPath = "bus:/";
 	FMOD.Studio.Bus masterBus;
-	FMOD.ChannelGroup masterChannelGroup;
 	float masterVolume;
 
 	FMOD.RESULT result;
 
 	FMOD.Studio.System system;
-	FMOD.Studio.VCA musicVCA;
 
 	void Start ()
 	{
-		//result = FMOD.Studio.System.create(out system);
+
 	}
 	
 	void OnEnable()
@@ -53,21 +49,24 @@ public class PauseMenuVolumes : MonoBehaviour
 
 	void Update ()
 	{
-	
+		system.update();
 	}
 
 	public void SetMusicVolume(Slider slider)
 	{
-		musicBus.setFaderLevel(musicVolume);
+		result = musicBus.setFaderLevel(musicVolume);
+		system.update();
 	}
 
 	public void SetSFXVolume(Slider slider)
 	{
-		sfxBus.setFaderLevel(sfxVolume);
+		result = sfxBus.setFaderLevel(sfxVolume);
+		system.update();
 	}
 
 	public void SetMasterVolume(Slider slider)
 	{
-		masterBus.setFaderLevel(masterVolume);
+		result = masterBus.setFaderLevel(masterVolume);
+		system.update();
 	}
 }

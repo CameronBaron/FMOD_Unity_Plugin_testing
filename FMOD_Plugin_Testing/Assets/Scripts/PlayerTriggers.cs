@@ -82,6 +82,7 @@ public class PlayerTriggers : MonoBehaviour
 			other.GetComponent<Renderer>().material.color = Color.red;
 			
 			reverbSnapshotEvent.start();
+			Debug.Log(other.gameObject.name + " zone entered.");
 		}
 	}
 
@@ -91,6 +92,7 @@ public class PlayerTriggers : MonoBehaviour
 		{
 			other.GetComponent<Renderer>().material.color = Color.green;
 			reverbSnapshotEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+			Debug.Log(other.gameObject.name + " zone left.");
 		}
 	}
 }
