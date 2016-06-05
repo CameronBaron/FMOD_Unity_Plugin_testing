@@ -1,40 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerTriggers : MonoBehaviour
-{
-	Rigidbody rb;                   // Rigidbody ref
+{							
+	[FMODUnity.EventRef]							// Shows the following line in unity's editor with FMOD functionality.
+	 public string music = "event:/Tune";			// The path to the sound to use.
+	 FMOD.Studio.EventInstance musicEvent;			// event music.
+	 FMOD.Studio.ParameterInstance musicEndParam;   // end param object (for transitioning to the end of music).
 
 	[FMODUnity.EventRef]
-	 public string music = "event:/Tune";
-	 FMOD.Studio.EventInstance musicEvent;			// cube event music
-	 FMOD.Studio.ParameterInstance musicEndParam;   // end param object (for transitioning to the end of music)
-
-	[FMODUnity.EventRef]
-	public string inputSound = "event:/Input_1";
+	public string inputSound = "event:/Input_1";    // Sounds that are played as a oneshot do not need an event instance.
+													// Although you cannot modify any parameters before playing this way.
 
 	[FMODUnity.EventRef]
 	public string reverbSnapshot = "event:/Reverb";
 	FMOD.Studio.EventInstance reverbSnapshotEvent;
 
-	FMOD.RESULT result;
+	public Text soundEffectDisplayText;
 
-	// Use this for initialization
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody>();
+		// Create FMOD instances and get parameters here.
+		//musicEvent = FMODUnity.RuntimeManager.CreateInstance(music);
 
-		// Create FMOD instances and get parameters here
-		musicEvent = FMODUnity.RuntimeManager.CreateInstance(music);
 		//musicEvent.getParameter("end", out musicEndParam);
-
-		reverbSnapshotEvent = FMODUnity.RuntimeManager.CreateInstance(reverbSnapshot);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
+		reverbSnapshotEvent = FMODUnity.RuntimeManager.CreateInstance(reverbSnapshot);		
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -42,57 +32,39 @@ public class PlayerTriggers : MonoBehaviour
 		/* If colliding with cubes */
 		if (other.gameObject.CompareTag("Pickup"))
 		{
+			// Playing one shot sound, will play the sound to end and then destroy(?) itself.
 			FMODUnity.RuntimeManager.PlayOneShot(inputSound);
-		}
-
-		if (other.gameObject.CompareTag("Playcube"))
-		{
-			FMOD.Studio.PLAYBACK_STATE play_state;
-			musicEvent.getPlaybackState(out play_state);
-			if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				//musicEndParam.setValue(0);
-				musicEvent.start();
-				other.GetComponent<Renderer>().material.color = Color.green;
-			}
-		}
-
-		if (other.gameObject.CompareTag("Stopcube"))
-		{
-			// When collision with stop cube occurs, transition to the end of the event music
-			//musicEndParam.setValue(1);
-			musicEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-			other.GetComponent<Renderer>().material.color = Color.black;
-			// Release song if it is not needed again anytime soon
-			//musicEvent.release();
-		}
-
-		if (other.gameObject.CompareTag("Killcube"))
-		{
-			// When collision with stop cube occurs, immediately stop event music
-			musicEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-			other.GetComponent<Renderer>().material.color = Color.red;
-			// Release song if it is not needed again anytime soon
-			//musicEvent.release();
-		}
+		}	
 
 		/* check for reverb zone */
 		if (other.gameObject.CompareTag("ReverbZone"))
 		{
-			other.GetComponent<Renderer>().material.color = Color.red;
-			
+			// Snapshots are started and stopped just like other events.
 			reverbSnapshotEvent.start();
-			Debug.Log(other.gameObject.name + " zone entered.");
+			soundEffectDisplayText.text = "Cave";
+		}
+
+		if (other.gameObject.CompareTag("Reverb2"))
+		{
+			// Snapshots are started and stopped just like other events.
+			reverbSnapshotEvent.start();
+			soundEffectDisplayText.text = "PaddedRoom";
 		}
 	}
 
+	// OnTriggerExit to turn off the ReverbZone
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag("ReverbZone"))
 		{
-			other.GetComponent<Renderer>().material.color = Color.green;
-			reverbSnapshotEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-			Debug.Log(other.gameObject.name + " zone left.");
+			reverbSnapshotEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			soundEffectDisplayText.text = "n/a";
+		}
+		if (other.gameObject.CompareTag("Reverb2"))
+		{
+			// Snapshots are started and stopped just like other events.
+			reverbSnapshotEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			soundEffectDisplayText.text = "n/a";
 		}
 	}
 }

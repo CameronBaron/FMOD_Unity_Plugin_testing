@@ -6,12 +6,14 @@ public class GameManager : MonoBehaviour
 {
 	public GameObject player;
 	public Canvas pauseCanvas;
+	public Canvas helpOverlay;
 
 	private bool paused = false;
 	// Use this for initialization
 	void Start ()
 	{
 		pauseCanvas.gameObject.SetActive(false);
+		helpOverlay.gameObject.SetActive(true);
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
 				player.GetComponent<FirstPersonController>().enabled = false;
 				paused = true;
 				pauseCanvas.gameObject.SetActive(true);
+				helpOverlay.gameObject.SetActive(false);
 				Cursor.visible = true;
 				return;
 			}
@@ -33,7 +36,14 @@ public class GameManager : MonoBehaviour
 			player.GetComponent<FirstPersonController>().enabled = true;
 			paused = false;
 			pauseCanvas.gameObject.SetActive(false);
+			helpOverlay.gameObject.SetActive(true);
 			Cursor.visible = false;
 		}
+	}
+
+	public void ExitApp()
+	{
+		Debug.Log("quit");
+		Application.Quit();
 	}
 }
